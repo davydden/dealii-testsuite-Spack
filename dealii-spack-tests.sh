@@ -14,23 +14,17 @@ SPACK_ROOT=/home/davydden/spack
 # a commit in Spack to use:
 SPACK_COMMIT=e8073970743e80e375d804b626ec64eaacd4da20
 
-# dealii specs (configuration) to test in addition to settings in packages.yaml:
-declare -a SPECS=('dealii+mpi^openmpi^openblas' 'dealii+mpi^openmpi^intel-mkl' 'dealii+mpi^openmpi^atlas' 'dealii+mpi+int64^openmpi^openblas' 'dealii+mpi^mpich^openblas' 'dealii+mpi+optflags^openmpi^openblas');
+BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python
 
+# dealii specs (configuration) to test in addition to BASE_SPEC:
+declare -a SPECS=(
+'^openmpi^openblas'
+'^openmpi^intel-mkl'
+'^openmpi^atlas'
+'+int64^openmpi^openblas'
+'^mpich^openblas'
+'+optflags^openmpi^openblas');
 
-# Prerequisites:
-# 1) ~/.spack/packages.yaml :
-# packages:
-#  dealii:
-#    version: [develop]
-#    variants: +adol-c+nanoflann+sundials+assimp
-# 2) ~/.spack/config.yaml :
-# config:
-#  build_stage:
-#    - $spack/var/spack/stage
-
-
-#
 # =======================================================
 # DON'T EDIT BELOW
 # =======================================================
@@ -61,15 +55,17 @@ spack load cmake
 # Go through all the specs and test:
 for i in "${SPECS[@]}"
 do
+  # current spec:
+  s="$BASE_SPEC$i"
   # install dependencies
-  spack install --only dependencies "$i" || { echo "failed to install $i" ; exit 1; }
+  spack install --only dependencies "$s" || { echo "failed to install $s" ; exit 1; }
   # install dealii and keep the stage folder
-  spack install --keep-stage "$i" || { echo "failed to install $i" ; exit 1; }
+  spack install --keep-stage "$s" || { echo "failed to install $s" ; exit 1; }
   # go to the stage
-  spack cd -s "$i"
+  spack cd -s "$s"
   cd dealii/spack-build
   # setup environement to be exactly the same as during the buld of the spec
-  # spack env "$i" bash
+  # spack env "$s" bash
   # setup / run / submit unit tests
   make -j"$NP" setup_tests
   ctest -j"$NP"
@@ -78,7 +74,7 @@ do
   # exit
   cd $SPACK_ROOT
   # remove the current installation so that next time we build from scratch
-  spack uninstall -y "$i"
+  spack uninstall -y "$s"
   # clean the stage:
   spack clean -s
 done
