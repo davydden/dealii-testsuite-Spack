@@ -19,10 +19,10 @@ BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python
 # dealii specs (configuration) to test in addition to BASE_SPEC:
 declare -a SPECS=(
 '^openmpi^openblas'
-'^openmpi^intel-mkl'
-'^openmpi^atlas'
-'+int64^openmpi^openblas'
-'^mpich^openblas'
+#'^openmpi^intel-mkl'
+#'^openmpi^atlas'
+#'+int64^openmpi^openblas'
+#'^mpich^openblas'
 '+optflags^openmpi^openblas'
 );
 
