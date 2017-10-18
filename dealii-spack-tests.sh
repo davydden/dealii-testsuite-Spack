@@ -83,11 +83,10 @@ do
   cd dealii/spack-build
   # setup environement to be exactly the same as during the buld of the spec.
   # then setup / run / submit unit tests via here document
-  spack env "$s" bash <<EOF
-make -j"$NP" setup_tests
-ctest -j"$NP"
+  spack env "$s" bash << EOF
 ctest -j"$NP" -DDESCRIPTION="$i" -V -S ../tests/run_testsuite.cmake
 EOF
+  secho "Finished testing: $s"
   cd $SPACK_ROOT
   # remove the current installation so that next time we build from scratch
   spack uninstall -a -y "$s"
