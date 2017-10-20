@@ -7,6 +7,7 @@
 # 0 0 * * * /path/to/dealii-spack-tests.sh
 # ^^^ run every day at midnight
 # p.s. check content by: crontab -l
+# check logs by: grep -i cron /var/log/syslog
 
 # Path to Spack:
 SPACK_ROOT=$HOME/spack
