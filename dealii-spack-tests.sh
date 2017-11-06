@@ -13,14 +13,14 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=882480fad629f9e98f7b6c83b7dc98ac7d836cc3
+SPACK_COMMIT=f538b7ac3e96ef6cd1d07c945f41eae991f372ab
 
 BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python
 
 # dealii specs (configuration) to test in addition to BASE_SPEC:
 declare -a SPECS=(
 '^openmpi^openblas'
-#'^openmpi^intel-mkl'
+'^openmpi^intel-mkl'
 #'^openmpi^atlas'
 #'+int64^openmpi^openblas'
 #'^mpich^openblas'
