@@ -13,7 +13,7 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=f538b7ac3e96ef6cd1d07c945f41eae991f372ab
+SPACK_COMMIT=34da07db9b0384c0ae7fa7fcbd11ce64232678f4
 
 BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python
 
