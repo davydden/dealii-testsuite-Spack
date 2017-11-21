@@ -67,14 +67,15 @@ git reset --hard $SPACK_COMMIT
 spack install numdiff
 spack load numdiff
 
+# clean the stage:
+spack clean -s
+
 # Go through all the specs and test:
 for i in "${SPECS[@]}"
 do
   # current spec:
   s="$BASE_SPEC$i"
   secho "Testing: $s"
-  # clean the stage:
-  spack clean -s
   # install dependencies
   spack install --only dependencies "$s" || { becho "Failed to install $s" ; exit 1; }
   # install dealii and keep the stage folder
@@ -91,6 +92,4 @@ EOF
   cd $SPACK_ROOT
   # remove the current installation so that next time we build from scratch
   spack uninstall -a -y "$s"
-  # clean the stage:
-  spack clean -s
 done
