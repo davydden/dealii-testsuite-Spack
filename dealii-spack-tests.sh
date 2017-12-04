@@ -13,9 +13,9 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=93d5a91a566a67913b75724242555b1e0e78a6aa
+SPACK_COMMIT=e9c66a76f00057f9900e8678765c474dc2a79823
 
-BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python
+BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python+scalapack
 
 # dealii specs (configuration) to test in addition to BASE_SPEC:
 declare -a SPECS=(
