@@ -13,18 +13,19 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=0ef741d2911d7e35d895681732c79fbfa422f76f
+SPACK_COMMIT=f764ac4573e512e9ccec6a6f7b3a0d0bf8c59c1b
 
-BASE_SPEC=dealii@develop+adol-c+nanoflann+sundials+assimp+mpi+python+scalapack+gmsh
+BASE_SPEC=dealii@develop
 
-# dealii specs (configuration) to test in addition to BASE_SPEC:
-declare -a SPECS=(
-'^openmpi^openblas'
-'^openmpi^intel-mkl'
-#'^openmpi^atlas'
-#'+int64^openmpi^openblas'
-#'^mpich^openblas'
-'+optflags^openmpi^openblas'
+# dealii specs (configuration) to test in addition to BASE_SPEC (after column) and their name (before column)
+declare -a NAME_SPECS=(
+'+int64^openmpi^openblas+ilp64:~adol-c~arpack~assimp~cuda~doc~gmsh~gsl~hdf5+int64~metis+mpi~nanoflann~netcdf~oce~optflags+p4est~petsc~python~scalapack~slepc~sundials~trilinos^openmpi^openblas+ilp64'
+#
+'^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
+#
+'^openmpi^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^intel-mkl'
+#
+'+optflags^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce+optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 );
 
 # =======================================================
@@ -71,11 +72,14 @@ spack load numdiff
 spack clean -s
 
 # Go through all the specs and test:
-for i in "${SPECS[@]}"
+for j in "${NAME_SPECS[@]}"
 do
+  n=${j%:*};
+  i=${j#*:};
   # current spec:
   s="$BASE_SPEC$i"
   secho "Testing: $s"
+  secho "Name:    $n"
   # install dependencies
   spack install --only dependencies "$s" || { becho "Failed to install $s" ; exit 1; }
   # install dealii and keep the stage folder
@@ -86,7 +90,7 @@ do
   # setup environement to be exactly the same as during the buld of the spec.
   # then setup / run / submit unit tests via here document
   spack env "$s" bash << EOF
-ctest -j"$NP" -DDESCRIPTION="$i" -V -S ../tests/run_testsuite.cmake
+ctest -j"$NP" -DDESCRIPTION="$n" -V -S ../tests/run_testsuite.cmake
 EOF
   secho "Finished testing: $s"
   cd $SPACK_ROOT
