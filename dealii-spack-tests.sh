@@ -19,7 +19,7 @@ BASE_SPEC=dealii@develop
 
 # dealii specs (configuration) to test in addition to BASE_SPEC (after column) and their name (before column)
 declare -a NAME_SPECS=(
-'+int64^openmpi^openblas+ilp64:~adol-c~arpack~assimp~cuda~doc~gmsh~gsl~hdf5+int64~metis+mpi~nanoflann~netcdf~oce~optflags+p4est~petsc~python~scalapack~slepc~sundials~trilinos^openmpi^openblas+ilp64'
+#'+int64^openmpi^openblas+ilp64:~adol-c~arpack~assimp~cuda~doc~gmsh~gsl~hdf5+int64~metis+mpi~nanoflann~netcdf~oce~optflags+p4est~petsc~python~scalapack~slepc~sundials~trilinos^openmpi^openblas+ilp64'
 #
 '^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
