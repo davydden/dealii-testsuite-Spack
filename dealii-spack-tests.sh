@@ -23,9 +23,9 @@ declare -a NAME_SPECS=(
 #
 #'+int64^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5+int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
-'^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
+'^openmpi^openblas:~adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
-'^openmpi^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^intel-mkl'
+'^openmpi^intel-mkl:~adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^intel-mkl'
 #
 #'+optflags^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce+optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 );
