@@ -92,7 +92,7 @@ do
   # setup environement to be exactly the same as during the buld of the spec.
   # then setup / run / submit unit tests via here document
   spack env "$s" bash << EOF
-ctest -j"$NP" -DDESCRIPTION="$n" -V -S ../tests/run_testsuite.cmake
+ctest -j"$NP" -DDESCRIPTION="$n" -DTRACK="Continuous" -V -S ../tests/run_testsuite.cmake
 EOF
   secho "Finished testing: $s"
   cd $SPACK_ROOT
