@@ -13,7 +13,7 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=658896a7a5bb527641af4cad4bb14c809958adbd # Mar 26 2018
+SPACK_COMMIT=388bb2ab3ee7f0406822d2c277b0f54b9aa0694f # Mar 28 2018
 
 BASE_SPEC=dealii@develop
 
