@@ -13,7 +13,7 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=388bb2ab3ee7f0406822d2c277b0f54b9aa0694f # Mar 28 2018
+SPACK_COMMIT=338fa8d7d6a3cabcb167063db44f9a00edb7088d # Apr 3 2018
 
 BASE_SPEC=dealii@develop
 
@@ -23,9 +23,9 @@ declare -a NAME_SPECS=(
 #
 #'+int64^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5+int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
-'^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
+'^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
-'^openmpi^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^intel-mkl'
+'^openmpi^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^intel-mkl'
 #
 #'+optflags^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce+optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 );
