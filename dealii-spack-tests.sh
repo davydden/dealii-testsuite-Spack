@@ -13,21 +13,22 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=cbd77e3a8d22f389041c216ba743eda601fe3754 # May 2 2018
+SPACK_COMMIT=e7a737621f81b7d532aeed733df5fc9e215fc93a # May 14 2018
 
 BASE_SPEC=dealii@develop
 
 # dealii specs (configuration) to test in addition to BASE_SPEC (after column) and their name (before column)
+# with 8 processes (4 core PC) a test suite takes about 21k seconds = 6 hours, whereas deal.II build takes about 45 minutes
 declare -a NAME_SPECS=(
 #'+int64^openmpi^openblas+ilp64:~adol-c~arpack~assimp~cuda~doc~gmsh~gsl~hdf5+int64~metis+mpi~nanoflann~netcdf~oce~optflags+p4est~petsc~python~scalapack~slepc~sundials~trilinos^openmpi^openblas+ilp64'
-#
-#'+int64^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5+int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
 '^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
 '^openmpi^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^intel-mkl'
 #
 #'+optflags^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce+optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
+#
+#'+int64^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5+int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 );
 
 # =======================================================
