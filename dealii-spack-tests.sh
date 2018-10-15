@@ -2,6 +2,8 @@
 #
 # A bash script to install and test various versions of deal.II via Spack
 #
+# Accepts a single argument which is a string "name:spec"
+#
 # Can be used with Cron job:
 # $crontab -e
 # 0 0 * * * /path/to/dealii-spack-tests.sh
@@ -15,21 +17,23 @@ SPACK_ROOT=$HOME/spack
 # a commit in Spack to use:
 SPACK_COMMIT=a6fb2fdea495ba53f3fae6a876ddc323307f8c15 # Oct 11 2018
 
-BASE_SPEC=dealii@develop
+# BASE_SPEC=dealii@develop
 
 # dealii specs (configuration) to test in addition to BASE_SPEC (after column) and their name (before column)
 # with 8 processes (4 core PC) a test suite takes about 21k seconds = 6 hours, whereas deal.II build takes about 45 minutes
-declare -a NAME_SPECS=(
+# declare -a NAME_SPECS=(
 #'+int64^openmpi^openblas+ilp64:~adol-c~arpack~assimp~cuda~doc~gmsh~gsl~hdf5+int64~metis+mpi~nanoflann~netcdf~oce~optflags+p4est~petsc~python~scalapack~slepc~sundials~trilinos^openmpi^openblas+ilp64'
 #
-'^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
+#'^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
-'^mpich^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^mpich^intel-mkl'
+#'^mpich^intel-mkl:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^mpich^intel-mkl'
 #
 #'+optflags^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce+optflags+p4est+petsc+python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #
 #'+int64^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5+int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
-);
+#);
+
+j=${1:-'^openmpi^openblas:dealii@develop+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'}
 
 # =======================================================
 # DON'T EDIT BELOW
@@ -75,12 +79,13 @@ spack load numdiff
 spack clean -s
 
 # Go through all the specs and test:
-for j in "${NAME_SPECS[@]}"
-do
+# for j in "${NAME_SPECS[@]}"
+# do
   n=${j%:*};
   i=${j#*:};
   # current spec:
-  s="$BASE_SPEC$i"
+  # s="$BASE_SPEC$i"
+  s="$i"
   secho "Testing: $s"
   secho "Name:    $n"
   # install dependencies
@@ -99,4 +104,4 @@ EOF
   cd $SPACK_ROOT
   # remove the current installation so that next time we build from scratch
   spack uninstall -a -y "$s"
-done
+# done
