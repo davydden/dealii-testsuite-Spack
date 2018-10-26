@@ -5,7 +5,7 @@
 # Accepts a single argument which is a string "name:spec"
 #
 # Can be used with Cron job:
-# $crontab -e
+# $EDITOR=/usr/bin/gedit crontab -e
 # 0 0 * * * /path/to/dealii-spack-tests.sh
 # ^^^ run every day at midnight
 # p.s. check content by: crontab -l
@@ -15,7 +15,7 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=a6fb2fdea495ba53f3fae6a876ddc323307f8c15 # Oct 11 2018
+SPACK_COMMIT=fb86598b35fba4b80a6efab17432408ea64834a7 # Oct 26 2018
 
 # BASE_SPEC=dealii@develop
 
