@@ -15,7 +15,7 @@
 SPACK_ROOT=$HOME/spack
 
 # a commit in Spack to use:
-SPACK_COMMIT=09033e991ef390370955eebecb2c0f734994d16b # Jan 12 2019
+SPACK_COMMIT=5d6461b895b01da6d06a9bbff0ecdf78ba17b8d5 # May 21 2019
 
 # BASE_SPEC=dealii@develop
 
@@ -33,7 +33,7 @@ SPACK_COMMIT=09033e991ef390370955eebecb2c0f734994d16b # Jan 12 2019
 #'+int64^openmpi^openblas:+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5+int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'
 #);
 
-j=${1:-'^openmpi^openblas:dealii@develop+adol-c+arpack+assimp~cuda~doc+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+trilinos^openmpi^openblas'}
+j=${1:-'^openmpi^openblas:dealii@develop+adol-c+arpack+assimp~cuda~doc+ginkgo+gmsh+gsl+hdf5~int64+metis+mpi+nanoflann+netcdf+oce~optflags+p4est+petsc~python+scalapack+slepc+sundials+symengine+trilinos^openmpi^openblas'}
 
 # =======================================================
 # DON'T EDIT BELOW
@@ -62,14 +62,14 @@ secho "Will use $NP processes"
 export PATH=$SPACK_ROOT/bin:$PATH
 spack install environment-modules
 MODULES_HOME=$(spack location -i environment-modules)
-source ${MODULES_HOME}/Modules/init/bash
+source ${MODULES_HOME}/init/bash
 . $SPACK_ROOT/share/spack/setup-env.sh
 
 # reset Spack to the desired commit:
-cd $SPACK_ROOT
-git checkout develop
-git pull
-git reset --hard $SPACK_COMMIT
+#cd $SPACK_ROOT
+#git checkout develop
+#git pull
+#git reset --hard $SPACK_COMMIT
 
 # Install and load numdiff
 spack install numdiff
@@ -94,7 +94,8 @@ spack clean -s
   spack install --keep-stage "$s" || { becho "Failed to install $s" ; exit 1; }
   # go to the stage
   spack cd -s "$s"
-  cd dealii/spack-build
+  secho "Stage folder: ${PWD}"
+  cd spack-build
   # setup environement to be exactly the same as during the buld of the spec.
   # then setup / run / submit unit tests via here document
   spack build-env "$s" bash << EOF
